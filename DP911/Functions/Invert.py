@@ -3,7 +3,7 @@ from DP911.Registers.Variables import Variable
 
 
 "0C NN"
-introduce = describe("0C", 1, 0)
+introduce = describe("0C", 1)
 
 
 def main(var_name: str or int):
