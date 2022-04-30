@@ -4,7 +4,7 @@ from DP911.Functions import describe
 import time
 import re
 
-"""02 NN,NN MM"""
+"02 NN,NN MM"
 introduce = describe("02", 2, 1)
 
 

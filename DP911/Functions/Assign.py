@@ -2,7 +2,7 @@ from DP911.Functions import describe
 from DP911.Registers.Variables import Variable
 
 
-"""1C NN MM"""
+"1C NN MM"
 introduce = describe("1C", 1, 1)
 
 

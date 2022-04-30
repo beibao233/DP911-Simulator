@@ -2,7 +2,7 @@ from DP911.Functions import describe
 
 import time
 
-"""0D"""
+"0D"
 introduce = describe("0D")
 
 

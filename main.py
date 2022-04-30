@@ -1,4 +1,4 @@
-from DP911.Registers import Code, Variables
+from DP911.Registers import Code
 from DP911.Interpreter import run
 
 from tkinter import *
