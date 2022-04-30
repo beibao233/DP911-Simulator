@@ -23,4 +23,4 @@ else:
 
 @atexit.register
 def exit_msg():
-    loguru.logger.info("程序正常结束！（死循环最大深度跳出）")
+    loguru.logger.info("程序正常结束！")
