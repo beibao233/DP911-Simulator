@@ -84,7 +84,11 @@ def jump(data: initialize, address: int):
             jump_address = run_module(code, frpara_data, separa_data)
 
             if isinstance(jump_address, int):
-                jump(data=data, address=jump_address)
+                try:
+                    jump(data=data, address=jump_address)
+                except RecursionError:
+                    sys.setrecursionlimit(sys.getrecursionlimit() + 1)
+                    jump(data=data, address=jump_address)
 
 
 def core(data: initialize):
@@ -121,3 +125,4 @@ def core(data: initialize):
                     jump(data=data, address=jump_address)
                 except RecursionError:
                     sys.setrecursionlimit(sys.getrecursionlimit()+1)
+                    jump(data=data, address=jump_address)
