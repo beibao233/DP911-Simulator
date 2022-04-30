@@ -30,6 +30,6 @@ def main(var_name: str or int, base: str or int):
     if unprocessed[0] == ' ':
         unprocessed.pop(0)
 
-    processed = ''.join(unprocessed)
+    processed = ''.join(unprocessed).upper()
 
     print(processed)
