@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, send_from_directory
 from DP911.Registers import Code
 from DP911.Interpreter import run
+from gevent import pywsgi
 import sys
 import os
 
@@ -30,4 +31,5 @@ async def editor():
 
 
 if __name__ == '__main__':
-    app.run()
+    server = pywsgi.WSGIServer(('0.0.0.0', 5000), app)
+    server.serve_forever()
