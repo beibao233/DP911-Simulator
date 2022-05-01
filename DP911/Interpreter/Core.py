@@ -1,16 +1,17 @@
-from typing import List
-
 from DP911.Functions import functions as function_list
 from DP911.Exceptions import FunctionNotFindError, JumpedWrongAddressError
+from typing import List
 import importlib
 import sys
 
 
 class initialize:
-    def __init__(self, codes: list, functions: dict = function_list()):
+    def __init__(self, codes: list, functions: dict = function_list(), web_mode: bool = False):
         self.codes = codes
         self.address_count = len(codes)
         self.functions = functions
+        self.web_mode = web_mode
+        self.result = []
 
 
 def import_module(data: initialize, address: int, skip_address: list):
@@ -81,14 +82,25 @@ def jump(data: initialize, address: int):
                                                    separa=separa
                                                    )
 
-            jump_address = run_module(code, frpara_data, separa_data)
+            jump_data = run_module(code, frpara_data, separa_data)
 
-            if isinstance(jump_address, int):
+            if isinstance(jump_data, tuple):
+                code = importlib.import_module(f"DP911.External.{jump_data[1]}")
+                if not data.web_mode:
+                    code.main(jump_data[0])
+                else:
+                    data.result.append(code.main(jump_data[0], web_mode=True))
+
+            elif isinstance(jump_data, int):
                 try:
-                    jump(data=data, address=jump_address)
+                    jump(data=data, address=jump_data)
                 except RecursionError:
-                    sys.setrecursionlimit(sys.getrecursionlimit() + 1)
-                    jump(data=data, address=jump_address)
+                    if not data.web_mode:
+                        sys.setrecursionlimit(sys.getrecursionlimit() + 1)
+                        jump(data=data, address=jump_data)
+                    else:
+                        code = importlib.import_module(f"DP911.External.Exit")
+                        data.result.append(code.main((), web_mode=True))
 
 
 def core(data: initialize):
@@ -118,11 +130,25 @@ def core(data: initialize):
                                                    separa=separa
                                                    )
 
-            jump_address = run_module(code, frpara_data, separa_data)
+            jump_data = run_module(code, frpara_data, separa_data)
 
-            if isinstance(jump_address, int):
+            if isinstance(jump_data, tuple):
+                code = importlib.import_module(f"DP911.External.{jump_data[1]}")
+                if not data.web_mode:
+                    code.main(jump_data[0])
+                else:
+                    data.result.append(code.main(jump_data[0], web_mode=True))
+
+            elif isinstance(jump_data, int):
                 try:
-                    jump(data=data, address=jump_address)
+                    jump(data=data, address=jump_data)
                 except RecursionError:
-                    sys.setrecursionlimit(sys.getrecursionlimit()+1)
-                    jump(data=data, address=jump_address)
+                    if not data.web_mode:
+                        sys.setrecursionlimit(sys.getrecursionlimit()+1)
+                        jump(data=data, address=jump_data)
+                    else:
+                        code = importlib.import_module(f"DP911.External.Exit")
+                        data.result.append(code.main((), web_mode=True))
+
+    if data.web_mode:
+        return data.result

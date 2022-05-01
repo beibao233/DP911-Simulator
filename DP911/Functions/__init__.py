@@ -1,5 +1,3 @@
-from DP911.Tools import ishex
-from DP911.Exceptions import WrongTypeArgument
 import importlib
 import os
 
@@ -11,10 +9,11 @@ class describe:
     frpara: 第一参数所占寄存器数量 (可选)
     separa: 第二参数所占寄存器数量 (可选)
     """
-    def __init__(self, key: str, frpara: int = 0, separa: int = 0):
+    def __init__(self, key: str, frpara: int = 0, separa: int = 0, output: bool = False):
         self.key = key
         self.frpara = frpara
         self.separa = separa
+        self.output = output
 
 
 def real_functions():

@@ -1,7 +1,7 @@
 
 def remove(text: str, chars: list = None):
     if chars is None:
-        chars = ['\n', ' ']
+        chars = ['\n', '\r', ' ']
 
     for char in chars:
         text = text.replace(char, "")

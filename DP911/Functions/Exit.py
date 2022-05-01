@@ -5,4 +5,4 @@ introduce = describe("0F")
 
 
 def main():
-    exit()
+    return (), "Exit"
