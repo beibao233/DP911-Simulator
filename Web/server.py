@@ -17,7 +17,7 @@ def favicon():
 @app.route("/", methods=['GET', 'POST'])
 async def editor():
     if request.method == 'POST':
-        code = request.form['code'].replace('\n', '%br')
+        code = request.form['code'].replace('\n', '\\n')
 
         try:
             return render_template("result.html",
@@ -34,7 +34,7 @@ async def editor():
         if str(request.args.get("code")) == "None":
             code = ""
         else:
-            code = request.args.get("code").replace('%br', '\n')
+            code = request.args.get("code").replace('\\n', '\n')
 
         return render_template("editor.html", code=code)
 
