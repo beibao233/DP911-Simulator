@@ -19,15 +19,17 @@ async def editor():
     if request.method == 'POST':
         try:
             return render_template("result.html",
+                                   code=request.form['code'],
                                    results_msg=run(Code.sim_storage_space(request.form['code']), web_mode=True),
                                    address=Code.sim_storage_space(request.form['code']))
         except Exception:
             return render_template("result.html",
+                                   code=request.form['code'],
                                    data=sys.exc_info(),
                                    address=Code.sim_storage_space(request.form['code']),
                                    mode=0)
     else:
-        return render_template("editor.html")
+        return render_template("editor.html", code=request.args.get("code"))
 
 
 def start_server(ip='0.0.0.0', port=5000):
