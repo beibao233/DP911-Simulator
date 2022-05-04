@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/logo.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'Resource'),
+    return send_from_directory(app.root_path.replace('Web', 'Resource'),
                                'logo.ico', mimetype='image/vnd.microsoft.icon')
 
 
