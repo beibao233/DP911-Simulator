@@ -80,7 +80,7 @@ class Variables:
 
     def read(self, register_name: int or str):
         """
-        保存hex str/int 到寄存器内
+        读取寄存器内的 hex str/int 数据
         :param register_name: hex str：00-0F / int：0-15
         :return:
         """
